@@ -1,0 +1,35 @@
+= テキストエディタを使用した JSON サンプルの作成
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+この手順は、API 仕様から Mule フローを生成するワークフローの一部です。
+
+Design Center の代わりにテキストエディタで api.raml ファイルを作成したら、連動する JSON サンプルファイルも作成する必要があります。API 仕様にサンプルが含まれます。
+
+次のコードをテキストエディタに入力し、RAML ファイルと同じディレクトリに user-example.json として保存します。
+
+----
+[{
+              "id": 1,
+              "name": "Leanne Graham",
+              "username": "Bret",
+              "email": "Sincere@april.biz",
+              "address": {
+                "street": "Kulas Light",
+                "suite": "Apt. 556",
+                "city": "Gwenborough",
+                "zipcode": "92998-3874",
+                "geo": {
+                  "lat": "-37.3159",
+                  "lng": "81.1496"
+                }
+                },
+              "phone": "1-770-736-8031 x56442",
+              "website": "hildegard.org",
+              "company": {
+                "name": "Romaguera-Crona",
+                "catchPhrase": "Multi-layered client-server neural-net",
+                "bs": "harness real-time e-markets"
+              } }]
+----

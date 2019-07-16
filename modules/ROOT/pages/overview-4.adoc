@@ -1,0 +1,54 @@
+= APIkit 4.x の概要
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+APIkit 3.x ユーザは、APIkit 4.x の使用をすばやく開始できます。基本的使用方法に変更はありません。このリリースでの主要な改善と変更は、次のとおりです。
+
+* APIkit が Mule プラグインになりました。
++
+** MuleSoft は、Mule Runtime の更新とは関係なく、APIkit をタイムリーに更新できます。
+** 異なる APIkit バージョンを使用するには、POM の連動関係を変更するだけです。
++
+image::apikit-pom.png[height=522,width=396]
++
+* APIフォルダは resources の下にあります。API 定義ファイルはルートフォルダ内で重複しなくなりました。
++
+image::api-folder.png[]
++
+* API コールをシミュレーションする API Console 4.0 は Studio に組み込まれていません。
++
+ブラウザで API Console を開くには、API を実行したときに表示される URL を入力します。
+* 「APIkit XML リファレンス」にリストされている APIkit XML 要素と属性の一部が変更されました。
+* エラー処理は Mule Runtime 4.0 と同じです。
+* APIkit 4.x では次の APIkit 3.x のプロパティが削除されます。
+** `consolePath`
+** `consoleEnabled`
+
+
+== APIkit の配布
+
+将来の改善および修正のタイミングは、Studio または Mule Runtime のリリーススケジュールによって制限されなくなりました。Studio では、インストールウィザードを使用して更新を確認します。APIkit バージョンを変更するには、アプリケーションの POM の連動関係を最新バージョンのモジュールに変更するだけです。
+
+[source,xml,linenums]
+----
+<dependency>
+  <groupId>org.mule.modules</groupId>
+  <artifactId>mule-apikit-module</artifactId>
+  <version>1.1.0</version>
+  <classifier>mule-plugin</classifier>
+</dependency>
+----
+
+== APIkit のカスタマイズ
+
+APIkit の設定をカスタマイズできます。たとえば、プロジェクトの configuration.xml 内の listener と listener-config を編集して、ホスト、ポート、パス、およびスキームを変更できます。
+
+
+== 関連情報
+
+* xref:apikit-simulate.adoc[API Console を使用した API コールのシミュレーション方法]
+* xref:validate-4-task.adoc[クエリパラメータとヘッダーの検証方法]
+* xref:customize-console-url-4-task.adoc[API コンソール URL のカスタマイズ方法]
+* xref:configure-headers4-task.adoc[ヘッダーの設定方法]
+* xref:execute-nonfunctional-requirements-4-task.adoc[機能以外の要件の実行方法]

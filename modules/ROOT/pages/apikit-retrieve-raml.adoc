@@ -1,0 +1,34 @@
+= RAML API ファイル参照の取得
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+curl または HTTP クライアント (Postman など) を使用して GET 要求を実行することとで、ルート RAML ファイルとそのインクルードファイルを取得できます。RAML 0.8 を使用している場合、1 回のコールでルート RAML ファイルとすべてのインクルードファイルを解決できます。次のように、GET 要求でヘッダーと URL を送信します。
+
+* ヘッダー: *Accept: application/raml+yaml*
+* URL: `{scheme}://{host}:{port}/{console path}`
+
+*RAML 0.8 の例*
+
+* ヘッダー: Accept: application/raml+yaml
+* URL: `+http://localhost:8081/console+`
+
+RAML 1.0 を使用する場合、ヘッダーを送信する必要はありません。GET メソッドを使用して、1 回のコールでルート RAML を表示できます。次のように GET メソッドを使用して、その他の含まれるリソースを表示することもできます。
+
+URL: `{scheme}://{host}:{port}/{console path}/{api resources folder}{optional resource path}/?raml`
+
+*RAML 1.0 の例 - ルート RAML ファイルの表示*
+
+URL: `+http://localhost:8081/console/api/?raml+`
+
+*RAML 1.0 の例 - インクルードファイルの表示*
+
+URL: `+http://localhost:8081/console/api/user.schema.json?raml+`
+
+*RAML 1.0 の例 - RAML フラグメントの表示*
+
+URL: `+http://localhost:8081/console/api/types/raml-types.raml?raml+`
+
+== 関連情報
+
+* xref:retrieve-raml-task.adoc[RAML ファイルの取得方法]

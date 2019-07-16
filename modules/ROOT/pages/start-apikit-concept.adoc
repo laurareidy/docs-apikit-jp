@@ -1,0 +1,53 @@
+= APIkit プロジェクトの開始について
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+Studio では、REST APIkit プロジェクトをいくつかの方法で開始できます。
+
+* [File (ファイル)] > [New (新規)] > [Mule Project (Mule プロジェクト)] を選択します。[Add APIkit Components (APIkit コンポーネントを追加)] をオンにします (API 定義ファイルの場所や URL は入力しない)。
+* [File (ファイル)] > [New (新規)] > [Mule Project (Mule プロジェクト)] を選択します。[Add APIkit Components (APIkit コンポーネントを追加)] をオンにします。API 定義ファイルの場所または URL を入力します。
+* 既存の Studio プロジェクト内に RAML ファイルを作成します (バックエンドファーストの APIkit 設計)。パッケージエクスプローラで、プロジェクト名を右クリックします。[Mule] > [Generate Flows From REST API (REST API からフローを生成)] を選択します。
+
+// revise last line for WSDL
+
+API 定義ファイルは RAML または WSDL です。[Add APIkit Components (APIkit コンポーネントを追加)] をオンにして API 定義ファイルをインポートまたは参照しない場合、スキャフォールディングにより次を含む骨格 RAML ファイルおよび XML 設定が生成されます。
+
+* メインフロー
++
+[source,xml,linenums]
+----
+<flow name="api-main">
+
+</flow>
+----
++
+* メインフローの HTTP Listener 設定
+* APIkit Router コンポーネント
+* エラーハンドラ
+
+この場合、プロジェクトファイルの src/main/resources/api 内の api.raml は実質的に空です。
+
+[Add APIkit Components (APIkit コンポーネントを追加)] をオンにして API 定義ファイルをインポートまたは参照した場合、スキャフォールディングにより API 定義ファイルの種類に応じてアーキタイプが作成されます。RAML 定義ファイルの場合、api.raml にはインポートした RAML が含まれます。次の要素が生成されます。
+
+* RAML
++
+** メインフロー
+** HTTP リスナの設定
+** APIkit Router コンポーネント
+** エラーハンドラ
+** RAML の連動関係
++
+Studio などの特定の場所から Design Center などの別の場所に変更をプッシュまたはプルします。
++
+* REST のリソースとアクションのマッピングを含むバックエンドフロー
++
+* WSDL
++
+** 上記のすべて
+** HTTP Listener を含むメインフロー
+** SOAP Router
+** SOAP エラー応答テンプレート
+** SOAP メッセージテンプレートを含むバックエンドフロー。
+
+SoapUI などの SOAP テストツールを使用して、API コールをシミュレーションします。WSDL を変更した場合、[Mule] > [Generate SOAP Flows (SOAP フローを生成)] を使用してバックエンドフローを再生成します。

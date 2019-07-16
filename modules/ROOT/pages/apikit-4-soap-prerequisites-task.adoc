@@ -1,0 +1,17 @@
+= APIkit for SOAP を使用する場合の前提条件
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+この手順では、APIkit を使用して WSDL ベースの API を作成する開発環境のセットアップ方法について説明します。
+
+. Studio 7.1 以降を使用していることを確認します。
+Studio には Anypoint APIkit SOAP Extension が含まれています。
+. SoapUI クライアントをダウンロードします。 +
+たとえば、 https://www.soapui.org/downloads/soapui.html[SoapUI] をダウンロードします。
+. WSDL ファイルの URL をダウンロードまたは取得します。 +
+このワークフローでは、link:{attachmentsdir}/tshirt2.wsdl[WSDL tshirt2.wsdl] サンプルをダウンロードします。
+
+== 関連情報
+
+* 次へ: xref:apikit-4-soap-project-task.adoc[APIkit for SOAP プロジェクトの作成]

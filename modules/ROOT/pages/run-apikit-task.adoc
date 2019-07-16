@@ -1,0 +1,14 @@
+= APIkit プロジェクトの実行方法
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+この手順は、APIkit プロジェクトを開始し、API を実行する準備が整っていることを前提としています。
+
+[Run As (別のユーザとして実行)] image:lrun-obj.png[実行アイコン] > [Mule Application (Mule アプリケーション)] をクリックします。
+
+これで、アプリケーションがデプロイされ、APIkit コンソールを使用して API コールをシミュレーションできるようになります。
+
+== 関連情報
+
+* xref:apikit-simulate.adoc[API コールのシミュレーション方法]

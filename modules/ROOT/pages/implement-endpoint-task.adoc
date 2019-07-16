@@ -1,0 +1,44 @@
+= エンドポイントの実装方法
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+API コールのシミュレーション後、次の手順に従って API のリリースを準備するサンプルを確認します。RAML サンプルのデータの代わりに、JSON Placeholder サイトの実際のデータを返すフローを変更および追加します。JSON Placeholder サイトの実際のデータを取得するようにユーザフローを変更します。
+
+. [HTTP Listener] コンポーネントを Mule パレットから get:/users:api-config フローの [Source (ソース)] セクションにドラッグします。
++
+image::source-section.png[]
++
+. Listener のプロパティエディタの [Connector Configuration (コネクタ設定)] で、[api-httpListenerConfig] を選択します。
++
+image::apikit-edit-listener.png[]
++
+image:edit-16x16.gif[Edit-16x16] をクリックし、[OK] をクリックしてデフォルトのホスト 0.0.0.0 とポート 8081 を受け入れます。
++
+. Listener のプロパティエディタで、[General (一般)] の [Path (パス)] に​*「/placeholder」*​と入力します。
+. [HTTP Request] コンポーネントを [Transform] の右にドラッグします。
+. Request の [Connector Configuration (コネクタ設定)] で、image:add-16x16.png[Add-16x16] をクリックします。
++
+[HTTP Request Configuration (HTTP 要求の設定)] が表示されます。
++
+. [HTTP Request Configuration (HTTP 要求の設定)] の次のオプションを設定します。
++
+* デフォルトの名前、HTTP_Request_Configuration を受け入れます。
+* デフォルトの HTTP プロトコルを受け入れます。
+* [Host (ホスト)] を​*「jsonplaceholder.typicode.com」* に設定します。
+* [Port (ポート)] を​*「80」*​に設定します。
+* その他のデフォルトを受け入れて、[OK] をクリックします。
++
+. Request のプロパティエディタで、次のオプションを設定します。
++
+* Method (メソッド): デフォルトの「GET」を受け入れます。
++
+* Path (パス): `/users`。
++
+. 変更を保存します。
+
+次に、ユーザのリストを ID で絞り込みます。
+
+== 関連情報
+
+* xref:filter-users-id-task.adoc[パラメータを使用した ID によるユーザの絞り込み方法]

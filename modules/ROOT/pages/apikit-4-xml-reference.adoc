@@ -1,0 +1,91 @@
+= APIkit XML Reference
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+:keywords: apikit, Maven
+
+このリファレンスには、連動関係、名前空間、スキーマ、および APIkit に関するその他の情報が含まれています。
+
+== APIkit 連動関係情報
+
+----
+<dependency>
+  <groupId>org.mule.modules</groupId>
+  <artifactId>mule-apikit-module</artifactId>
+  <version>1.1.0</version>
+  <classifier>mule-plugin</classifier>
+</dependency>
+----
+
+*APIkit 名前空間およびスキーマ*
+
+----
+xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd"
+----
+
+=== Apikit 要素
+
+[%header,cols="30a,50a,8a"]
+|===
+|要素名 |説明 |必須
+|*apikit:config* |APIkit 設定。 |Y
+|*apikit:console* |API Console URL を定義する api-console フロー内の http:listener 要素の config-ref プロパティを参照します。 |N
+|*apikit:router* |フロー要素内でネストされた REST ルーティングメッセージプロセッサ。 |Y
+|===
+
+=== apikit:config の属性
+
+これらの要素は NonBlankString 型です。
+
+[%header,cols="22a,10a,68a"]
+|===
+|属性名|必須 |説明
+|*outboundHeadersMapName* |N |応答ヘッダーを含むマップの名前を識別するために使用されます。
+|*httpStatusVarName* |N |応答の HTTP 状況コードを保存する変数の名前。
+|*keepRamlBaseUri* |N | 同等の「keepApiBaseUri」属性の別名。
+
+この属性は APIkit 1.2.0 から非推奨になり、APIkit 1.1.x との互換性のためにのみ残されています。 +
+API 実装では「keepRamlBaseUri」の代わりに「keepApiBaseUri」を使用することをお勧めします。
+|*name* |Y |apikit:router などの他の要素が参照する設定名。
+|*raml* |Y | 同等の「api」属性の別名。
+
+この属性は APIkit 1.2.0 から非推奨になり、APIkit 1.1.x との互換性のためにのみ残されています。 +
+API 実装では「raml」の代わりに「api」を使用することをお勧めします。
+|*parser* | N | 要求の検証に使用されるパーサーを指定します。
+
+*この属性は、APIkit 1.2.0 以降で有効です。*
+
+可能な値:
+
+* AUTO: APIkit ルータは AMF の使用開始を試み、それが可能でない (エラーがある) 場合、RAML パーサーを使用して試行します。
+* AMF: APIkit ルータは AMF を使用して API を読み取り、受信要求を検証します。
+* RAML: APIkit ルータは RAML パーサーを使用して API を読み取り、受信要求を検証します。これは以前の APIkit バージョンと似ています。
+
+*デフォルト値: AUTO*.
+
+| *api* | N | ルート API ファイルの場所。
+
+*この属性は、APIkit 1.2.0 以降で有効です。*
+
+`src/main/resources/api` の下位にあるファイルへの相対パスの任意の URL を使用できます。
+
+| *keepApiBaseUrii* | N | *この属性は、APIkit 1.2.0 以降で有効です。*
+
+*false* に設定すると、API の RAML 定義内の `baseUri` が書き換えられます。 +
+*true* に設定すると、`baseUri` 項目は書き換えられません。
+
+
+|===
+
+リバースプロキシの背後で APIkit を使用している場合、`keepRamlBaseUri` を true に設定してプロキシの URL を baseUri プロパティで設定していれば、API Console を使用できます。
+
+=== apikit:router の属性
+
+[%header,cols="22a,10a,68a"]
+|===
+|属性名|必須 |説明
+|*disableValidations* |N |要求の検証を無効にします。
+|*headerStrictValidation* |N |要求ヘッダーが RAML ファイルで定義されているか、既知のヘッダーのセットに属していることを検証します。
+|*queryParamsStrictValidation* |N |要求クエリパラメータが RAML ファイルで定義されていることを検証します。
+|===

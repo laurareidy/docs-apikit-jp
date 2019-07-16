@@ -1,0 +1,12 @@
+= 機能以外の要件の実行方法
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+メッセージプロセッサを定義することで、機能以外の要件または品質属性を実行できます。たとえば、1 つの場所にすべてのフローのログまたはトレーサビリティを追加できます。
+
+メッセージプロセッサをメインフローのルータの後に追加します。
+
+== 関連情報
+
+* https://docs.mulesoft.com/mule-user-guide/v/3.9/custom-message-processors

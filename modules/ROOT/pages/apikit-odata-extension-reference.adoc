@@ -1,0 +1,148 @@
+= APIkit OData 拡張リファレンス
+:keywords: apikit, Apikit 拡張, odata, APIkit Odata リファレンス
+
+RAML を使用して作成したエンティティデータモデル (EDM) は、OData API を作成するための基盤となります。EDM 互換のデータ型を使用して、このリファレンスで説明されているように `odata.raml` ファイルを作成します。APIkit OData 拡張を使用してフローを生成したら、API エンドポイントを実装する必要があります。
+
+== エンティティデータモデル
+
+APIkit OData 拡張は、サポートされる EDM 型を使用して OData エンティティデータモデル (EDM) を記述する `odata.raml` に基づいて OData API を作成します。`odata.raml` ファイルは RAML ライブラリです。各 DataType は EntityModel を表します。次に例を示します。
+
+[source,yaml,linenums]
+----
+
+#%RAML 1.0 Library
+uses:
+  odata: !include libraries/odata.raml
+types:
+  Employee:
+    properties:
+      id:
+        type: integer
+        (odata.key): bool
+        (odata.nullable): bool
+      name:
+        type: string
+----
+
+アノテーション (odata.key) を使用して、各エンティティの少なくとも 1 つのプロパティにアノテーションを追加します。
+
+次のアノテーションは各プロパティに関連します。
+
+[source,yaml]
+----
+(odata.precision): int
+(odata.scale): int
+----
+
+省略可能な (odata.remote) アノテーションを使用して、リモートデータソースのエンティティの名前を指定します。
+
+[source,yaml,linenums]
+----
+types:
+  Employee:
+  (odata.remote): SAP_VBAK
+    properties:
+      ...
+----
+
+== サポートされる EDM データ型
+
+APIkit OData 拡張では、Edm.Sbyte 以外のすべての EDM 型がサポートされています。モデル内で、次のサポートされる EDM 型のリストに示されている EDM 型にマップする RAML 型を定義します。
+
+=== Edm.String
+
+String (文字列) 型は、固定長または可変長の文字データを表します。
+
+RAML `type: string`
+
+=== Edm.Boolean
+
+Boolean (ブール) データ型は、バイナリ値ロジックの数学的概念を表すために使用されます。この型に該当するファセットはありません。
+
+RAML `type: boolean`
+
+=== Edm.Double
+
+Double (倍精度浮動小数点数) 型は、± 2.23e -308 から ± 1.79e +308 までのおおよその範囲の値を表すことができる 15 桁の精度の浮動小数点数を表します。
+
+RAML `type: number`
+
+=== Edm.Single
+
+Single (単一) 型は、± 1.18e -38 から ± 3.40e +38 までのおおよその範囲の値を表すことができる 7 桁の精度の浮動小数点数を表します。
+
+RAML `type: number`
+
+RAML `format: float`
+
+=== Edm.Binary
+
+binary (バイナリ) データ型は、固定長または可変長のバイナリデータを表します。
+
+RAML `type: file`
+
+=== Edm.DateTime
+
+DateTime (日時) 型は、西暦 1753 年 1 月 1 日午前 0 時から西暦 9999 年 12 月 31 日午後 11:59:59 までの範囲の値の日時を表します。
+
+RAML `type: datetime-only`
+
+=== Edm.Int32
+
+Int32 型は、符号付き 32 ビット整数値を表します。
+
+RAML `type: integer`
+
+=== Edm.Int64
+
+Int64 型は、符号付き 64 ビット整数値を表します。
+
+RAML `type: integer`
+
+RAML `format: int64`
+
+=== Edm.Int16
+
+Int16 型は、符号付き 16 ビット整数値を表します。
+
+RAML `type: integer`
+
+RAML `format: int16`
+
+=== Edm.Byte
+
+Byte (バイト) 型は、符号なし 8 ビット整数値を表します。
+
+RAML `type: integer`
+
+RAML `format: int8`
+
+=== Edm.Decimal
+
+Decimal (小数) 型は、精度と桁数が固定された数値を表します。これらの省略可能なプロパティを変更して、必要な精度と桁数を指定できます。この型は、負の 10^255 + 1 から正の 10^255 -1 までの範囲の数値を表示できます。
+
+RAML `type: number`
+
+RAML `(odata.precision): 3`
+
+RAML `(odata.scale): 3`
+
+=== Edm.Guid
+
+グローバル一意識別子 (GUID) 型は、UUID 標準 (RFC 4122) に準拠している 16 バイト (128 ビット) の番号を表します。
+
+RAML `type: string`
+
+RAML `(odata.type): guid`
+
+=== Edm.Time
+
+Time (時間) 型は、0:00:00.x から 23:59:59.y までの範囲の値の時刻を表します。x と y は精度によって異なります。
+
+RAML `type: time-only`
+
+=== Edm.DateTimeOffset
+
+DateTimeOffset 型は、西暦 1753 年 1 月 1 日午前 0 時から西暦 9999 年 12 月 31 日午後 11:59:59 までの範囲の値の GMT からのオフセット (分) で日時を表します。
+
+RAML `type: datetime`

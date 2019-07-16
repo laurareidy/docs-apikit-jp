@@ -1,0 +1,39 @@
+= RAML ベースのフローの生成について
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+APIkit スキャフォールディング手法は通常、RAML 仕様から APIkit 4.x の次のコンポーネントを生成します。
+
+image::scaffolding.png[]
+
+* アーキタイプ
++
+基本設定ファイルおよび Mule XML 設定 (Mule コード)
++
+* API の実装
++
+** HTTP リスナと APIkit ルータ
++
+ルーティングおよび RAML リソースへのバインド用。
++
+** API Console
++
+モッキングサービスを使用した API コールのシミュレーション用。
+** フロー
++
+モック実装。後でフローにビジネスロジックを追加する必要があります。
+
+Studio では、APIkit プロジェクトは次のようになります。
+
+image::apikit-flows.png[]
+
+リソースメソッドごとに 1 つのフローが生成されます。
+
+image::apikit-flow-per-method.png[height=558,width=256]
+
+生成された最小限のフローは、REST 契約で要求されるコミュニケーション操作を満たします。
+
+== APIkit ルータ
+
+APIkit ルータは、RAML 定義に対する要求を検証し、メッセージへのデフォルト値の追加などでメッセージを強化し、要求をフローに転送する主要なメッセージプロセッサです。たとえば、要求が無効な場合は「Bad request (不正な要求)」が返され、要求した RAML リソースがフローに関連付けられていない場合は「Not implementation (実装されていません)」が返されます。

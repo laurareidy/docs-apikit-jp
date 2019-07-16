@@ -1,0 +1,45 @@
+= SOAP エラーの防止方法
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+この手順では、生成した SOAP エラーを解決します。Transform Message コンポーネントをフローに追加し、要求に応答するために DataWeave でメッセージを指定して、操作を効果的に実装します。DataWeave コードでは、要求への応答の先頭の faultcode を回避するために適切な名前空間を使用します。
+
+WSDL で定義されたエンドポイントに達すると、Transform Message コンポーネントはプロセス側で機能します。このアクションは Mule アプリケーションのメインフローの実行をトリガしてから、バックエンドフローをコールします。
+
+. Studio で、OrderTshirt:\soapkit-config フローの [Transform Message] コンポーネントをクリックします。
++
+[Transform Message] プロパティウィンドウに、生成された DataWeave コードが表示されます。
++
+. DataWeave コードを次のように変更します。
++
+[source,raml,linenums]
+----
+%dw 2.0
+output application/java
+ns ns0 http://mulesoft.org/tshirt-service
+---
+{
+    body: {
+        ns0#OrderTshirtResponse: {
+            orderId: "I got a request from " ++ (payload.body.ns0#OrderTshirt.name default "")
+        }
+    } write "application/xml"
+}
+----
+. プロジェクトを保存して再実行します。
++
+. SoapUI クライアントで、SOAP エラーを生成する要求を再送信します。
++
+出力は有効な応答に変更されます。
+
+[source,xml,linenums]
+----
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+      <ns0:OrderTshirtResponse xmlns:ns0="http://mulesoft.org/tshirt-service">
+         <orderId>I got a request from John</orderId>
+      </ns0:OrderTshirtResponse>
+   </soap:Body>
+</soap:Envelope>
+----

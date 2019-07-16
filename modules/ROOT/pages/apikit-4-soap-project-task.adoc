@@ -1,0 +1,28 @@
+= APIkit for SOAP プロジェクトの作成方法
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+新しいプロジェクトを作成し、APIkit コンポーネントの使用を指定して、ダウンロードした WSDL ファイルを参照します。
+
+. [File (ファイル)] メニューで、[New (新規)] > [Mule Project (Mule プロジェクト)] を選択します。
++
+[New Mule Project (新規 Mule プロジェクト)] ウィザードが表示されます。
+. [Project Name (プロジェクト名)] に、プロジェクトの名前 (*「myproject」* など) を入力します。デフォルトの EE ランタイム (Mule Server 4.1.0 EE など) を選択するか受け入れます。
+. [API Implementation (API 実装)] で、[API Definition File Location or URL (API 定義ファイルの場所または URL を指定)] をオンにし、ダウンロードした WSDL ファイルを参照します。
+. ドロップダウンからサービスとポートを選択するか、デフォルトを受け入れます。この例では、デフォルトの「TshirtService」と「TshirtServicePort」を受け入れます。
++
+image::apikit-4-project.png[]
++
+. デフォルトのプロジェクトの場所を受け入れ、[Finish (完了)] をクリックします。
++
+新しいプロジェクトが表示されます。プロジェクトには WSDL ファイルを含む `src/main/resources/api` フォルダがあります。
++
+. キャンバス上の空白領域を右クリックして、プロジェクトを実行するオプションを選択します。
+. `+http://localhost:8081/TshirtService/TshirtServicePort?wsdl+` に移動します。
++
+TShirtService WSDL ファイルの内容が表示されます。
+
+== 関連情報
+
+* xref:apikit-4-soap-prerequisites-task.adoc[APIkit for SOAP を使用する場合の前提条件を満たす方法]

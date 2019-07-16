@@ -1,0 +1,69 @@
+= 型付けされたエラーの表示方法
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+この手順では、ListInventory 操作で型付けされたエラーを表示するようにします。tshirt2.wsdl ファイルの場合、TshirtFault という 1 つの型付けされたエラーのみがあります。これは、WSDL が持つすべての操作 (OrderTshirt、ListInventory、TrackOrder) にマップされます。
+
+APIkit for SOAP は、次の種別の SOAP エラーをサポートしています。
+
+* Soap Fault 1.1
+* Soap Fault 1.2
+
+型付けされたエラーが含まれないファイルでも、任意の WSDL ファイルを使用していずれかの種別を選択できます。
+
+. Studio で、パレット内のエラーを検索します。
++
+複数の SOAP Fault コンポーネントが表示される場合があります。
++
+. [SOAP Fault] コンポーネントを ListInventory:api-config フローの [Transform] の右にドラッグアンドドロップします。
++
+バージョンの不一致について知らせる「Operation Unavailable (操作は使用できません)」メッセージが表示された場合、操作をキャンセルして別の SOAP Fault コンポーネントを選択します。バージョンの一致が見つかるまで、この手順を繰り返します。
+. プロパティエディタの [Module Configuration (モジュール設定)] で、ドロップダウンから [soapkit-config] を選択します。
+. [Operation (操作)] で、ドロップダウンから [ListInventory] を選択します。
+. [Fault (エラー)] で、ドロップダウンから [TshirtFault] を選択し、プロパティを保存します。
+. [SOAP Fault] コンポーネントの左にある [Transform Message] コンポーネントをクリックします。
+. DataWeave コードを次のように変更します。
++
+[source,raml,linenums]
+----
+%dw 2.0
+output application/xml
+ns ns0 http://mulesoft.org/tshirt-service
+ns soap http://schemas.xmlsoap.org/soap/envelope/
+---
+{
+  soap#Fault: {
+    faultcode: "soap:Server",
+    faultstring: "The error details",
+    detail: {
+      ns0#TshirtFault: {
+        errorStuff: 500
+      }
+    }
+  }
+}
+----
++
+. プロジェクトを保存して再実行します。
++
+SoapUI クライアントを使用して、ListInventory 操作を実行します。
++
+クライアントは、デフォルトのエラーの代わりに次のエンベロープを返します。
++
+[source,xml,linenums]
+----
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+      <soap:Fault>
+         <faultcode>soap:Server</faultcode>
+         <faultstring>The error details</faultstring>
+         <detail>
+            <ns0:TshirtFault xmlns:ns0="http://mulesoft.org/tshirt-service">
+               <errorStuff>500</errorStuff>
+            </ns0:TshirtFault>
+         </detail>
+      </soap:Fault>
+   </soap:Body>
+</soap:Envelope>
+----

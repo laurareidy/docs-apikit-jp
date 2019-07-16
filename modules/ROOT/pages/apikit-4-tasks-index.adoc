@@ -1,0 +1,14 @@
+= 主要な APIkit 4.x タスク
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+**** xref:validate-4-task.adoc[クエリパラメータとヘッダーの検証方法]
+**** xref:regenerate-flows.adoc[APIkit プロジェクトの変更方法]
+**** xref:customize-console-url-4-task.adoc[API コンソール URL のカスタマイズ方法]
+**** xref:execute-nonfunctional-requirements-4-task.adoc[機能以外の要件の実行方法]
+**** xref:configure-headers4-task.adoc[ヘッダーの設定方法]
+**** xref:update-4-task.adoc[APIkit プロジェクトの更新方法]
+**** xref:retrieve-raml-task.adoc[RAML ファイルの取得方法]
+**** xref:configure-cloudhub-path-task.adoc[CloudHub のデプロイメントパスの設定方法]
+**** xref:configure-load-balancer-task.adoc[ロードバランサの設定方法]

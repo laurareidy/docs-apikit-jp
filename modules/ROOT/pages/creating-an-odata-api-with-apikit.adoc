@@ -1,0 +1,273 @@
+= OData 対応 API の作成
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+:keywords: apikit, Apikit 拡張, odata
+
+APIkit OData 拡張では、HTTP ベースのデータサービスの作成で OData (Open Data Protocol) バージョン 2 がサポートされています。これらのサービスを通じて、HTTP を使用してデータソースをクエリできます。 +
+APIkit OData 拡張は、OData サービスがリソースの記述を形式化するために使用するエンティティデータモデル (EDM) からサービスを作成します。EDM 互換のデータ型を使用して RAML で EDM を記述し、API エンティティを表します。 +
+APIkit OData 拡張は、OData 要求を処理する Mule フローを生成します。データソースを設定してフローにエンドポイントを追加した後にアプリケーションをデプロイすると、異なる URL からアクセスできる RESTful API と OData API が公開されます。このページのサンプル OData MySQL は、HTTP ベースのデータサービスを使用して MySQL データベースを照会する方法を示しています。
+
+APIkit OData 拡張を使用して、従来の API を OData API として公開したり、Salesforce で公開する前にデータを調整したり、Oracle、DB2、または Azure DB 用の双方向の OData API を作成したりできます。
+
+== 前提条件
+
+APIkit で OData 対応 API を作成および使用するには、次のソフトウェアが必要です。
+
+* OData プラグイン
+* Mule EE 4.1.1 以降
+* Anypoint Studio 7.1.4 以降
+* Maven
+
+== APIKit OData 拡張のインストール
+
+次の手順の説明に従って、Anypoint Studio から APIKit OData 拡張をインストールします。
+
+. Studio の *[Help (ヘルプ)]* メニューから、*[Install New Software (新しいソフトウェアをインストール)]* を選択します。
+. *[Add... (追加...)]* をクリックします。
+. *[Name (名前)]* 項目で `APIkit for ODATA Update Site` と入力します。
+. *[Location (場所)]* 項目で `+http://studio.mulesoft.org/s3/apikit-for-odata+` と入力します。
+. *[OK]* をクリックします。
++
+Studio に選択する項目のリストが表示されます。
++
+. Anypoint OData プラグインを更新するチェックボックスをオンにします。
+. *[Next (次へ)]* をクリックします。
++
+[Install Remediation Page (インストール修復ページ)] が表示される場合があります。
++
+. *[Next (次へ)]* をクリックし、もう一度 *[Next (次へ)]* をクリックして、修復ソフトウェアをインストールします。
+. 商品の契約条件に同意し、*[Finish (完了)]* をクリックします。
++
+Studio の右下隅に「Installing Update (%) (更新のインストール中 (%))」メッセージが表示されます。
++
+. Studio を再起動してインストールを完了します。
+
+== APIKit OData 拡張の使用
+
+前提条件ソフトウェアをインストールしたら、APIkit OData 拡張を使用するための次の概要手順を実行します。
+
+. `odata.raml` という名前のエンティティデータモデルを定義し、RAML ライブラリとしてファイルを設定します。
++
+[TIP]
+link:{attachmentsdir}/odata.raml[サンプルエンティティデータモデル] をダウンロードして、ファイルの作成方法を確認できます。
+
++
+. Anypoint Studio で新しい Mule プロジェクトを作成します。*[File (ファイル)]* をクリックし、*[New (新規)] > [Mule Project (Mule プロジェクト)]* を選択します。
++
+[New Mule Project (新規 Mule プロジェクト)] ダイアログで、*[Specify API definition file location or URL (API 定義ファイルの場所または URL を指定)]* を選択します。
+. *[Finish (完了)]* をクリックします。
+. Studio プロジェクトエクスプローラで `odata.raml` を /src/main/resources/api にコピーします。
+. プロジェクトエクスプローラで、`odata.raml` を右クリックし、*[Mule]* > *[Generate OData API from RAML Types (RAML 型からの OData API の生成)]* を選択します。
++
+OData 拡張は、/src/main/resources/api 内に `api.raml`、/src/main/resources/api/libraries 内に `ODataLibrary.raml` を生成します。生成されたフローは、`api.xml` を選択したときにキャンバスに表示されます。
++
+image::creating-an-odata-api.png[]
++
+. データソースを照会するロジックとエンドポイントを追加します。
++
+. OData API をデプロイします。
+
+== OData API のデプロイ
+
+サンプルアプリケーションは、次の方法を含むいくつかの方法でデプロイできます。
+
+* ローカル
++
+プロジェクトを右クリックし、*[Run As (別のユーザとして実行)]* > *[Mule Application (Mule アプリケーション)]* を選択します。
+* CloudHub へ
++
+プロジェクトを右クリックし、*[Anypoint Platform]* > *[Deploy to CloudHub (CloudHub にデプロイ)]* を選択します。
+
+デプロイしたら、Salesforce などの外部 OData コンシューマサービスに OData アプリケーションを登録することもできます。
+
+== サンプル OData MySQL
+
+サンプル OData MySQL は、Maven プロジェクトとしてパッケージ化された、完全に機能する OData API です。このサンプルでは、データソース、アプリケーション、およびサービスはローカルです。 +
+
+まず、MySQL データベースをインストールし、提供されたスクリプトを使用してテーブルを読み込みます。次に、MySQL データベースドライバを含む圧縮プロジェクトを Studio にインポートします。フローを調べて、データにアクセスすることで必要なエンドポイントを実装する方法を確認できます。次に、プロジェクトを実行して REST サービスと OData サービスをコールします。
+
+. MySQL データベースをインストールします。MySQL を起動します。
++
+[TIP]
+ステップ 3 でダウンロードした Maven プロジェクトには `mysql-connector-java-5.1.37.jar` MySQL データベースドライバが含まれるため、ドライバをプロジェクトで使用可能にする必要はありません。
+
++
+. link:{attachmentsdir}/example.sql[example.sql スクリプト] をダウンロードします。MySQL コマンドを使用してスクリプトを実行し、データを apikit-odata-example という名前のデータベースに読み込みます。
+. link:{attachmentsdir}/apikit-odata-example-master.zip[圧縮 Maven プロジェクト]、`apikit-odata-example-master.zip` をダウンロードして展開します。
++
+[TIP]
+`pom.xml` やその他のプロジェクトファイルは、apikit-odata-example-master ディレクトリにあります。
+
++
+. Studio で、*[File (ファイル)]* > *[Import (インポート)]* を選択します。
++
+*[Select (選択)]* ダイアログが表示されます。
++
+. *[Anypoint Studio]* > *[Anypoint Studio Project from file system (Anypoint Studio プロジェクトをファイルシステムから)]* を選択します。*[Next (次へ)]* をクリックします。
++
+[Import Mule Project (Mule プロジェクトのインポート)] ダイアログが表示されます。
++
+. apikit-odata-example-master ディレクトリから POM ファイルを参照して選択します。*[Finish (完了)]* をクリックします。
++
+[TIP]
+プロジェクトエクスプローラにテストプロジェクトが表示されます。プロジェクトエクスプローラで src/main/app 内の `api.xml` をクリックすると、APIkit OData 拡張によってキャンバスに表示されるフローが生成されます。
+
++
+. Studio で、src/main/app フォルダ内の `mule-app.properties` ファイルを編集し、次のプロパティを設定してローカル MySQL データベースにアクセスします。
++
+[source,html,linenums]
+----
+ds.db.port=3306
+ds.db.user=<your MySQL user name>
+ds.db.host=<your MySQL host name>
+ds.db.database=apikit-odata-example
+ds.db.password=<your MySQL password>
+----
++
+. プロジェクトを右クリックし、*[Run As (別のユーザとして実行)]* > *[Mule Application with Maven (Maven を使用した Mule アプリケーション)]* を選択して、API をローカルで実行します。
+
+これで、REST および OData サービスにアクセスできます。
+
+== REST および OData サービスへのアクセス
+
+API をローカルで実行する手順は、次のとおりです。
+
+. プロジェクトを右クリックし、*[Run As (別のユーザとして実行)]* > *[Mule Application with Maven (Maven を使用した Mule アプリケーション)]* を選択します。
+. 次の URL を使用して REST および OData サービスにアクセスします。
++
+* REST API: `/api`
+* OData API: `/api/odata.svc`
++
+次の例では、使用可能な多数の REST コールと OData クエリのうちのいくつかを示します。
+
+=== 顧客リストを取得する
+
+顧客リストを取得する REST API をコールします。
+
+----
+http://localhost:8081/api/customers
+----
+
+
+応答は次のようになります。
+[source,JSON,linenums]
+----
+{
+  "entries": [
+    {
+      "ContactName": "Maria Anders",
+      "ContactTitle": "Sales Representative",
+      "CompanyName": "Alfreds Futterkiste",
+      "CustomerID": ""
+    },
+    {
+      "ContactName": "Maria Anders",
+      "ContactTitle": "Sales Representative",
+      "CompanyName": "Alfreds Futterkiste",
+      "CustomerID": "ALFKI"
+    },
+  ]
+}
+----
+
+=== OData サービスの記述にアクセスする
+
+このサービスの背後にあるコレクションについての情報を取得します。
+
+----
+http://localhost:8081/api/odata.svc
+----
+
+応答は次のようになります。
+[source,xml,linenums]
+----
+<service xmlns="http://www.w3.org/2007/app" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xml:base="http://localhost:8081">
+  <workspace>
+    <atom:title>Default</atom:title>
+    <collection href="customers">
+      <atom:title>customers</atom:title>
+    </collection>
+    <collection href="orders">
+      <atom:title>orders</atom:title>
+    </collection>
+  </workspace>
+</service>
+----
+
+=== OData サービスメタデータを取得する
+
+サービスメタデータは、OData サービスリソースの構造、その操作、および特定のサービスの EDM を公開します。
+
+HTTP サービスのメタデータを取得します。
+
+----
+http://localhost:8081/api/odata.svc/$metadata
+----
+
+応答は、HTTP サービス API のサンプルを作成するために使用した `odata.raml` EDM と同じです。
+[source,xml,linenums]
+----
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" Version="1.0">
+<edmx:DataServices xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="2.0">
+<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="odata2.namespace">
+<EntityType Name="customers">
+<Key>
+<PropertyRef Name="CustomerID"/>
+</Key>
+<Property Name="CompanyName" Type="Edm.String" Nullable="true" MaxLength="40" Unicode="false"/>
+<Property Name="ContactName" Type="Edm.String" Nullable="true" MaxLength="30" Unicode="false"/>
+<Property Name="ContactTitle" Type="Edm.String" Nullable="true" MaxLength="30" Unicode="false"/>
+<Property Name="CustomerID" Type="Edm.String" Nullable="false" MaxLength="5" Unicode="false"/>
+</EntityType>
+<EntityType Name="orders">
+<Key>
+<PropertyRef Name="OrderID"/>
+<PropertyRef Name="ShipName"/>
+</Key>
+<Property Name="Freight" Type="Edm.Decimal" Nullable="true" Precision="3" Scale="3" Unicode="false"/>
+...
+----
+
+=== データソースを照会する
+
+顧客リストを XML および JSON 形式で取得する OData クエリを発行します。
+
+----
+http://localhost:8081/api/odata.svc/customers
+http://localhost:8081/api/odata.svc/customers?$format=json
+----
+
+顧客リスト内の 10 番目の顧客を取得する OData クエリを発行します。
+
+----
+http://localhost:8081/api/odata.svc/customers?$format=json&$top=1&$skip=10&$inlinecount=allpages
+----
+
+応答は次のようになります。
+[source,json,linenums]
+----
+{
+    "d": {
+        "results": [
+            {
+                "__metadata": {
+                    "uri": "http:/localhost:8081/api/odata.svc/customers('BOTTM')",
+                    "type": "odata2.namespace.customers"
+                },
+                "CompanyName": "Bottom-Dollar Markets",
+                "ContactName": "Elizabeth Lincoln",
+                "ContactTitle": "Accounting Manager",
+                "CustomerID": "BOTTM"
+            }
+        ],
+        "__count": "98"
+    }
+}
+----
+
+== 関連情報
+
+* xref:apikit-odata-extension-reference.adoc[APIkit OData 拡張リファレンス]
+* xref:runtime-manager::deploying-to-cloudhub.adoc[CloudHub へのデプロイ]
+* xref:implement-endpoints-odata-task.adoc[エンドポイントの実装]

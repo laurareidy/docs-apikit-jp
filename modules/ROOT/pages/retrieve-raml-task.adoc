@@ -1,0 +1,16 @@
+= RAML ファイルの取得方法
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+この手順では、API 仕様のコードと、API を作成、テスト、および実装するワークフローの連動ファイルを表示します。そのワークフロー中に作成した API を実行していることを前提としています。
+
+. ターミナルを開き、API 仕様の RAML コードを表示する curl コマンドを入力してから、インクルードファイルの内容を表示する curl コマンドを入力します。
++
+* `+curl http://localhost:8081/console/api/?raml+`
++
+* `+curl http://localhost:8081/console/api/user-example.json?raml+`
+
+== 関連情報
+
+* xref:apikit-retrieve-raml.adoc[RAML リソース参照の取得]

@@ -1,0 +1,78 @@
+= OData API のエンドポイントの実装
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+Anypoint Studio を使用して、`get:/customers:config` や `get:/orders:config` フローなどの API エンドポイントを実装できます。フローの出力形式は JSON である必要があります。詳細は、xref:creating-an-odata-api-with-apikit.adoc#odata-mysql-example[完全な機能例]を参照してください。
+
+== GET 用の入力変数の宣言
+
+. 文字列のリスト (List<String>) にエンティティの項目を含む APIkit OData サービス変数用の変数を宣言します。次に例を示します。
++
+[source,javascript,linenums]
+----
+var entityFields = vars.odata.fields
+----
++
+. 「http.query.params」に絞り込む APIkit OData サービス変数用の変数を宣言します。次に例を示します。
++
+[source,javascript,linenums]
+----
+var filters = attributes.queryParams
+----
++
+. エンティティのキーを含む APIkit Odata サービス変数用の変数を宣言します。次に例を示します。
++
+[source,javascript,linenums]
+----
+var keys = vars.odata.keyNames
+----
++
+. テーブル名を含む APIkit OData サービス変数用の変数を宣言します。次に例を示します。
++
+[source,javascript,linenums]
+----
+var remoteEntityName = vars.odata.remoteEntityName
+----
+
+== POST 用の入力変数の宣言
+
+. エンティティの名前を含む APIkit Odata サービスインバウンドプロパティ用の変数を宣言します。
++
+[source,javascript,linenums]
+----
+var remoteEntityName = vars.odata.remoteEntityName
+----
++
+. ペイロードを { myKey1: 'myValue1', myKey2: 'myValue2'} などに変換するための変数を宣言します。
++
+[source,javascript,linenums]
+----
+var valuesFromPayload = {
+  keys: payload pluck $$,
+  values: payload pluck "'$'"
+}
+----
++
+. 2 つの変数を宣言し、joinBy を使用してキーと値をカンマ区切り値 (CSV) に変換します。次に例を示します。
++
+[source,javascript,linenums]
+----
+var columns = ( (valuesFromPayload.keys map "`$`" ) joinBy ", ") // myKey1, myKey2
+var values = (valuesFromPayload.values joinBy ", ") // 'myValue1', 'myValue2'
+----
+
+== 出力の形式設定
+
+各フローの出力は、次の形式にする必要があります。
+[source,xml,linenums]
+----
+{
+  "entries":
+  [
+    {<entry1>},
+    {<entry2>},
+    {<entryN>}
+  ]
+}
+----

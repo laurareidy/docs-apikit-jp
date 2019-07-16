@@ -1,0 +1,37 @@
+= ヘッダーの設定方法
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+HTTP Listener では、応答 HTTP ヘッダーと状況コードの詳細形式を設定できます。2 つのプロパティを設定します。
+
+* `outboundHeadersMapName`
++
+応答でのカスタムヘッダーの送信をサポートします。
++
+* `httpStatusVarName`
++
+応答でのカスタム HTTP 状況コードの送信をサポートします。
+
+
+== 応答へのヘッダーの追加
+
+次の例に示すように、追加するヘッダーを `outboundHeaders` マップ内に挿入します。
+
+[source,xml,linenums]
+----
+<ee:transform>
+    <ee:set-variables>
+    <ee:set-variable name="outboundHeaders">
+        variables.outboundHeaders ++{headerName:"value"}
+    </ee:set-variable>
+</ee:set-variables>
+</ee:transform>
+----
+
+
+== 関連情報
+
+
+* xref:apikit-simulate.adoc[API Console を使用した API コールのシミュレーション方法]
+* xref:validate-4-task.adoc[クエリパラメータとヘッダーの検証方法]

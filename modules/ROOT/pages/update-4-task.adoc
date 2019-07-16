@@ -1,0 +1,16 @@
+= APIkit プロジェクトの更新方法
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+APIkit 4.x は Mule プラグインです。将来の改善および修正のタイミングは、Studio または Mule Runtime のリリーススケジュールによって制限されません。Studio プロジェクトでは、インストールウィザードを使用して更新を確認します。Maven ベースの Mule プロジェクトで APIkit バージョンを変更するには、アプリケーションの POM の連動関係を最新バージョンのモジュールに変更するだけです。
+
+[source,xml,linenums]
+----
+<dependency>
+  <groupId>org.mule.modules</groupId>
+  <artifactId>mule-apikit-module</artifactId>
+  <version>1.1.0</version>
+  <classifier>mule-plugin</classifier>
+</dependency>
+----

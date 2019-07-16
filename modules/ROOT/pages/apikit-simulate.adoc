@@ -1,0 +1,67 @@
+= API コールのシミュレーション方法
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+API コールのシミュレーションは、問題のトラブルシューティングや、想定されるユーザを対象とした API のデモを API の実装前でも行えるようにしてくれる重要なデザインタスクです。シミュレーションは RAML の特定の要素に依存します。
+
+* 実際の実装が返すデータの例
+* API が返す HTTP 状況コードと応答
+
+////
+You can use the mocking service in API Console to provide a base URI for an API you haven’t implemented yet.
+////
+
+API への有効な要求をシミュレーションしてすべて成功した場合、API Console は状況コード 200 とサンプルデータを返します。
+
+// The Enterprise Edition of APIkit uses DataWeave for generating a mocked implementation that simulates calls to the API based on the examples provided in a RAML definition.
+
+この手順では、API Console の URL を見つけます。ブラウザに URL を入力して API コールをシミュレーションします。この手順は、Mule フローを生成する APIkit プロジェクトの実行が終了した直後であることを前提としています。シミュレーションでは、JSON リソースをコンシュームしてユーザ情報を絞り込むコールを実行します。
+
+. Studio で、[APIkit Consoles (APIkit コンソール)] に表示される基点 URL `http://localhost:8081/console/` をクリックします。
++
+image::apikit-consoles.png[]
++
+デフォルトのブラウザが開きます。
++
+API Console が表示され、API の概要と、バージョンやプロトコルなどのプロジェクトに関する情報が示されます。
++
+image::apikit-console1.png[api console version info,height=313,width=398]
++
+. 必要に応じて、ハンバーガーメニューをクリックするか、ブラウザの幅を広くして、API リソースのシミュレーションコントロールを表示します。
++
+image::apikit-console2.png[api console summary,height=313,width=398]
++
+. [API Summary (API の概要)] で、`/users` リソースの [GET] をクリックします。
++
+成功を示す HTTP 200 応答と、必要な `/users` リソースの JSON サンプルが表示されます。
++
+image::apikit-console3.png[apikit response,height=524,width=395]
++
+. [API Summary (API の概要)] で、`users` リソースをクリックしてメソッドとサブリソースに関するドキュメントを表示します。
+. [API Summary (API の概要)] で、`/userbyid` を展開します。`/usersbyid` リソースの [GET] をクリックし、[Try It.(試す)] をクリックします。
++
+[Parameters (パラメータ)] タブと [Headers (ヘッダー)] タブが表示され、クエリパラメータとヘッダーを要求に追加できます。
++
+. [Show Optional Parameters (省略可能なパラメータを表示)] をオンにし、[Send (送信)] をクリックします。
++
+成功を示す HTTP 200 応答が表示されます。`/usersbyid` リソースの JSON サンプル (id 3 のユーザのユーザ情報) が表示されます。
++
+image::apikit-console4.png[tryit]
+
+////
+. Hover over the controls in the Details section to see what you can do with the content of the simulation:
++
+* Copy content to clipboard
+* Save content to file
+* View with highlighted syntax
+* Preview response
+* Wrap or unwrap text
+////
+
+これで、エンドポイントを実装する準備ができました。
+
+== 関連情報
+
+* xref:implement-endpoint-task.adoc[エンドポイントの実装方法]
+* xref:run-apikit-task.adoc[APIkit プロジェクトの実行方法]

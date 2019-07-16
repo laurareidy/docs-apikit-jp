@@ -1,0 +1,45 @@
+= SOAP ヘッダーの取得方法
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+この手順では、要求から SOAP ヘッダーを取得します。SoapUI では、要求ウィンドウに soap Envelope ヘッダーが表示されます。
+
+image::apikit-for-soap-53dc2.png[]
+
+. SoapUI で、API キーの値を入力して OrderTshirt 要求を変更します。たとえば、`<apiKey>` タグの間に `987654321` を入力します。
+
+. Studio で、OrderTshirt:\soapkit-config フローの [Transform Message] をクリックします。
+. DataWeave コードを編集して API キーを取得します。これはヘッダープロパティです。
++
+[source,raml,linenums]
+----
+%dw 2.0
+output application/java
+ns ns0 http://mulesoft.org/tshirt-service
+---
+{
+      body : {
+         ns0#OrderTshirtResponse: {
+           orderId: "I got a request from "
+           ++ payload.body.ns0#OrderTshirt.name
+           ++ " using the following auth header"
+           ++ payload.headers.header.ns0#AuthenticationHeader.apiKey
+        }
+    } write "application/xml"
+}
+----
++
+. プロジェクトを保存して再実行します。
+. SoapUI で、OrderTshirt エンドポイントに要求を送信し、応答が次のように表示されることを確認します。
++
+[source,xml,linenums]
+----
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+      <ns0:OrderTshirtResponse xmlns:ns0="http://mulesoft.org/tshirt-service">
+         <orderId>I got a request from John, using the following auth header 987654321</orderId>
+      </ns0:OrderTshirtResponse>
+   </soap:Body>
+</soap:Envelope>
+----

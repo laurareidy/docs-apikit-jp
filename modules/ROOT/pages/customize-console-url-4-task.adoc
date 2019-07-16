@@ -1,0 +1,27 @@
+= API コンソール URL のカスタマイズ方法
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+この手順では、ブラウザベースの API コンソールの URL をカスタマイズする方法について説明します。モッキングサーバを使用して API コールをシミュレーションするには、API Console が必要です。API Console の URL をカスタマイズしない場合は、ブラウザを開いて `/console` に移動します。
+
+. Studio で、[Configuration XML (設定 XML)] タブを選択します。
+
+. コードのこの部分の path 属性でコンソールパスを変更します。
++
+[source,xml,linenums]
+----
+<flow name="api-console">
+    <http:listener config-ref="httpListenerConfigDefault" path="/console/*">
+        <http:response statusCode="#[vars.httpStatus default 200]">
+            <http:headers>#[vars.outboundHeaders default {}]</http:headers>
+        </http:response>
+
+...
+
+    </http:listener>
+    <apikit:console config-ref="api-config" />
+</flow>
+----
++
+. listener-config を編集してホストとポートを変更します。

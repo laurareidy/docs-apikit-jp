@@ -1,0 +1,19 @@
+= CloudHub のデプロイメントパスの設定方法
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+:keywords: apikit, REST, コンソール, ロードバランサ, パスの設定
+
+リリースノートに記載されているように、APIkit では RAML 1.0 および 0.8 バージョンがサポートされています。APIkit プロジェクトは、オンサイトまたは CloudHub で実行できます。API をデプロイするリージョンに関係なく、CloudHub には一意のアプリケーション名が必要です。
+
+アプリケーション名にリージョン名を追加して、一意性を確保します。次に例を示します。
+
+`test-customers-eu`
+
+`test-customers-na`
+
+デフォルトでは、APIkit は各 API にベースパス `/api` を追加します。CloudHub にデプロイされる API の最終的な URL は、次のようになります。
+
+`+http://test-customers.eu.cloudhub.io/api/customers+`
+
+`+http://acceptance-customer.eu.cloudhub.io/api/customers+`

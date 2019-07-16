@@ -1,0 +1,40 @@
+= APIkit プロジェクトの開始方法
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+この手順では、Design Center またはテキストエディタで作成した Studio に RAML をインポートします。
+
+. Studio で、[File (ファイル)] > [New (新規)] > [Mule Project (Mule プロジェクト)] をクリックします。[Project Settings (プロジェクトの設定)] で、次のオプションを設定します。
+* Project Name (プロジェクト名): *「myproject」*​などの名前を入力します。
+* [API Implementation (API 実装)] で、[API Definition File Location or URL (API 定義ファイルの場所または URL を指定)] オプションをオンにします。
+* [Location (場所)] で、次のいずれかを実行します。
++
+** Design Center で api.raml を作成した場合は、[Design Center] を選択します。必要に応じて Anypoint Platform にログインし、api.raml を選択します。
++
+image::import-dc-api.png[]
++
+** または、Design Center で RAML を作成しなかった場合は、[Browse Files (ファイルを参照)] を選択します。
++
+image::import-browse-api.png[]
++
+テキストエディタで作成した `api.raml` を参照して選択します。
++
+. その他のデフォルトのオプションを受け入れて [Finish (完了)] をクリックします。
++
+api.raml および user-example.json インクルードファイルがプロジェクトにインポートされます。
++
+完了したら、新しいプロジェクトが起動し、HTTP Listener、APIkit Router、およびエラー処理を含むメインフローが生成されます。`users` および `usersbyid` リソースの情報をコンシュームするバックエンドフローが表示されます。
++
+image::apikit-apimain.png[apimain 内のファイル]
++
+api.raml および user-example.json ファイルが `src/main/resources/api` に表示されます。
++
+image::apikit-explorer.png[src-main-resources 内のファイル]
+
+これで、API を実行する準備ができました。
+
+== 関連情報
+
+* xref:run-apikit-task.adoc[APIkit プロジェクトの実行方法]
+* Design Center を使用した xref:design-center::design-create-publish-api-specs.adoc[API 仕様または API フラグメントの作成とパブリッシュ]

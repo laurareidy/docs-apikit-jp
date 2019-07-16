@@ -1,0 +1,104 @@
+= ワークフロー: 既存の Mule プロジェクトの APIkit プロジェクトへの変換
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+新しい Studio プロジェクトを作成し、API 定義ファイルを _指定しない_ 場合、APIkit は次を含む骨格 RAML ファイルおよび XML 設定を生成します。
+
+* HTTP リスナの設定
+* APIkit Router コンポーネント
+* エラー処理フロー
+
+次のスクリーンショットは、[Specify API definition file location or URL (API 定義ファイルの場所または URL を指定)] オプションを示しています。これをオフにすると、最初にバックエンドが作成されます。
+
+image::backend-first-project.png[]
+
+後で、API 仕様を追加してから、API Console を使用して API をシミュレーションできます。
+
+== 既存の設計への APIkit の追加
+
+次のように Studio 内で RAML コードを作成することで、既存の設計 (RAML と APIkit を使用して最新化する従来のプロジェクトなど) に APIkit のコンポーネントを追加します。
+
+*RAML ベースの API*
+
+* API 定義ファイルを定義する。
+* HTTP Listener と APIkit Router を含むメインフローを作成するか、既存のフローを使用する。
+* バックエンドフローを生成する。
+
+生成されたバックエンドフローには、API のコアロジック、エラー処理フロー、API Console が含まれます。REST リソースとアクションのペアリングを追加する必要があります。
+
+== API 定義ファイルの定義
+
+RAML ベースの API が必要な場合は、Studio を使用して [File (ファイル)] > [New (新規)] > [RAML API Definition (RAML API 定義)] でファイルを作成できます。
+
+image::new-raml.png[]
+
+次に例を示します。
+
+. 「ワークフロー: API 仕様からの Mule フローの生成」で提供された RAML 仕様および連動する JSON サンプルファイルを使用します。
+
+. /src/main/resources/api で RAML の名前を右クリックして [Validate (検証)] を選択します。RAML に問題がなければ続行します。
+
+. 連動ファイルを作成するか、Studio のメイン RAML の横にドラッグアンドドロップします。たとえば、[user-example.json] を [/src/main/resources/api] にドラッグします。
++
+未定義の属性に関する [Problem (問題)] ウィンドウのエラーメッセージは無視します。
+
+== メインフローの作成
+
+APIkit プロジェクト内で、フローを作成します。
+
+. 次のコンポーネントを Mule パレットからドラッグします。
++
+* HTTP Listener
+* APIkit Router
++
+. APIkit Router のプロパティエディタの [Router Configuration (ルータ設定)] で、`api-config` を選択します。
+. HTTP Listener のプロパティエディタの [Connector Configuration (コネクタ設定)] で、[api-httpListenerConfig] を選択してパスを設定します。たとえば、[Path (パス)] に `/` を入力します。
+
+
+== REST バックエンドフローの生成
+
+Studio で RAML を作成するときに、バックエンドフローの生成は省略可能です。RAML ベースの API ではエラー処理が生成されます。生成されたフローをメインフローから参照する必要があります。この手順は、すでにメインフローを作成済みであることを前提としています。
+
+バックエンドフローを生成する手順は、次のとおりです。
+
+. Package Explorer で、プロジェクト名を右クリックします。
+. [Mule] > [Generate Flows From REST API (REST API からフローを生成)] を選択します。
++
+メインフローの下にバックエンドフローが表示されます。
+
+== アクションへの RAML リソースのマップ
+
+バックエンドファーストの設計プロセスの一部として、次の手順に示すように RAML リソースをアクションにマップします。この手順は、バックエンドフローを生成済みであることを前提としています。
+
+アクションにリソースをマップする手順は、次のとおりです。
+
+. [APIkit Router] をクリックして​*プロパティエディタ*​を開きます。*[Router configuration (ルータ設定)]* で、image:add-16x16.png[] をクリックします。
++
+*[Global Element Properties (グローバル要素のプロパティ)]* ウィザードが表示されます。
++
+. Studio 内で作成した RAML ファイルへの相対パス (src/main/resources/api/api.raml など) を入力します。参照時にはファイル名のみが使用され、それでは不十分です。
+. [Mappings (マッピング)] で、image:add-16x16.png[] をクリックして新しいマッピングを作成します。
++
+*[New Mapping (新規マッピング)]* ダイアログが表示されます。
+. ドロップダウンを使用して、リソースをアクションにマップします。
++
+* [Resource (リソース)] ドロップダウンで、`/users` を選択する。
++
+* [Action (アクション)] ドロップダウンで、`GET` を選択する。
++
+* [Flow (フロー)] ドロップダウンで、get users アクションを含むフロー `get:\users:api-config` を選択する。
++
+*[OK]* をクリックします。
++
+image::map-resource-to-action.png[apikit-using-ab251]
++
+. API の各リソースとアクションのペアリングで、前のステップを繰り返します。
+
+これで、新しいプロジェクトを実行し、API Console を使用してコールをシミュレーションする準備ができました。
+
+== 関連情報
+
+* xref:apikit-4-generate-workflow.adoc[ワークフロー: API 仕様からの Mule フローの生成]
+* xref:run-apikit-task.adoc[APIkit プロジェクトの実行方法]
+* xref:apikit-simulate.adoc[API コールのシミュレーション方法]

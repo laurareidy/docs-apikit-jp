@@ -1,0 +1,33 @@
+= SOAP エラーの生成方法
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+この手順では、SoapUI ツールを使用して、失敗する API を作成して実装する必要がある操作を特定します。OrderTshirt 操作を使用して、John 用の大きい T シャツを注文する要求を SOAP UI で作成します。API はこの操作を処理できず、SOAP エラーが発生します。
+
+. SOAP クライアント、たとえば SoapUI で、デプロイされた Mule APIkit プロジェクトの URL を初期 WSDL で使用して新しい SOAP プロジェクトを作成します。このワークフローでは、URL は `+http://localhost:8081/TshirtService/TshirtServicePort?wsdl+` です。
++
+image::soapui-new-project.png[]
++
+. SoapUI で、要求エンベロープに値を入力して John 用の大きい T シャツを要求します。次に例を示します。
++
+* [Projects (プロジェクト)] > [TshirtServicePort?wsdl] > [TshirtServiceSoapBinding] > [OrderTshirt] > [Request 1 (要求 1)] をクリックします。
+* `<size>` タグの間に​*「L」*​を入力します。
++
+* `<name>` タグの間に​*「John」*​を入力します。
++
+. 要求を送信します。
++
+結果は SOAP エラーになります。
++
+[source,xml,linenums]
+----
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+      <soap:Fault xmlns:soap="http://schemas.xmlsoap.org/soap/envelope">
+         <faultcode>soap:Server</faultcode>
+         <faultstring>Operation [OrderTshirt:\soapkit-config] not implemented</faultstring>
+      </soap:Fault>
+   </soap:Body>
+</soap:Envelope>
+----

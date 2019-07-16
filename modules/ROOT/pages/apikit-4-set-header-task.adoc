@@ -1,0 +1,56 @@
+= SOAP ヘッダーの設定方法
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+この手順では、WSDL に準拠している応答にヘッダー情報を追加します。WSDL ドキュメントに準拠しているヘッダー情報は、APIUsageInformation と呼ばれます。
+
+. Studio で、`src/main/resources/api` の tshirt2.wsdl を開き、契約で必要な APIUsageInformation 要素までスクロールします。要素の名前をクリップボードにコピーします。
+. キャンバスで `OrderTshirt:/soapkit-config` フローの [Transform Message] を選択し、プロパティエディタで [Add New Target (新規対象の追加)] をクリックします。
++
+image::apikit-for-soap-3005f.png[height=440,width=700]
++
+. ドロップダウンから [Variable (変数)] を選択します。
++
+. [Variable Name (変数名)] で、クリップボードのコンテンツを貼り付け、プレフィクスとして *soap.* を追加するか、​*「soap.APIUsageInformation」*​と入力します。
++
+完全な変数名は次のようになります。
++
+soap.APIUsageInformation
++
+. [OK] をクリックします。
+. [Output (出力)] で、[apiCallsRemaining: _Integer_] をダブルクリックします。
++
+image::apikit-for-soap-41732.png[height=440,width=700]
++
+[apiCallsRemaining] をダブルクリックすると、アウトバウンドプロパティの DataWeave コードに `APIUsageInformation: { apiCallsRemaining: null }` が追加されます。
++
+[source,raml,linenums]
+----
+%dw 2.0
+output application/java
+---
+{
+  "soap.APIUsageInformation": null
+}
+----
++
+. null を *「10」* に変更します。
+. プロジェクトを保存して再実行します。
+. SoapUI で、OrderTshirt 要求をもう一度実行します。APIkit for SOAP の応答エンベロープは次のようになります。
++
+[source,xml,linenums]
+----
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Header>
+      <ns0:APIUsageInformation xmlns:ns0="http://mulesoft.org/tshirt-service">
+         <apiCallsRemaining>10</apiCallsRemaining>
+      </ns0:APIUsageInformation>
+   </soap:Header>
+   <soap:Body>
+      <ns0:OrderTshirtResponse xmlns:ns0="http://mulesoft.org/tshirt-service">
+         <orderId>I got a request from John, using the following auth header 987654321</orderId>
+      </ns0:OrderTshirtResponse>
+   </soap:Body>
+</soap:Envelope>
+----

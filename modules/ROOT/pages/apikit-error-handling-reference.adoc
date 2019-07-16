@@ -1,0 +1,38 @@
+= APIkit エラー処理リファレンス
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+APIKit は、Mule 4 の主要なエラー処理メカニズムに基づいてエラー処理コードを生成します。コンポーネントに問題が発生した場合、それに応じて型付けされたエラーとメッセージが表示されます。生成されたコードは、最も広く使用されている HTTP 状況コードの応答に使用できます。これは、次の表の型とエラーメッセージにマップされています。
+
+
+[%header,cols="10a,60a,30a"]
+|===
+| Status Code (状況コード) | 型| Message (メッセージ)
+| 400 | APIKIT:BAD_REQUEST | Bad request (不正な要求)
+| 404 | APIKIT:NOT_FOUND | Resource not found (リソースが見つかりません)
+| 405 | APIKIT:METHOD_NOT_ALLOWED | Method not allowed (メソッドが許可されていません)
+| 406 | APIKIT:NOT_ACCEPTABLE | Not acceptable (使用できません)
+| 415 | APIKIT:UNSUPPORTED_MEDIA_TYPE | Unsupported media type (サポートされていないメディアタイプ)
+|===
+
+次の HTTP 400 応答の例は、エラーハンドラの構成を示しています。独自のカスタム状況コードを追加するには、ここに示されたパターンに従います。
+
+[source,xml,linenums]
+----
+ <on-error-propagate type="APIKIT:BAD_REQUEST" doc:name="On Error Propagate">
+                <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+                    <ee:message>
+                        <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{message: "Bad request"}]]></ee:set-payload>
+                    </ee:message>
+                    <ee:variables>
+                        <ee:set-variable variableName="httpStatus">400</ee:set-variable>
+                    </ee:variables>
+                </ee:transform>
+            </on-error-propagate>
+----
+
+メッセージがエラーをスローするたびに、APIkit はプロジェクトで定義された on-error-propagate 型の値とエラーが一致するかどうかを確認します。APIkit プロジェクトのメインフローは、HTTP 状況コードおよび対応するわかりやすいメッセージで構成される HTTP エラー応答を送信します。

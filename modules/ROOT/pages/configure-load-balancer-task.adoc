@@ -1,0 +1,8 @@
+= ロードバランサの設定方法
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+API 実装で APIkit アプリケーションの前にロードバランサを配置する必要がある場合は、直接アプリケーションの `baseUri` を参照する URL をリダイレクトするようにロードバランサを設定します。ロードバランサが URL をリダイレクトしない場合、アプリケーションを探してロードバランサに到達したコールは宛先に到達しません。たとえば、APIkit アプリケーションを `myapp.mycompany.com` にデプロイし、`www.exampleloadbalancer.com` でロードバランサを追加します。API へのコールが `www.exampleloadbalancer.com` に到達すると、ロードバランサは応答を取得するためにそのコールを `myapp.mycompany.com` にリダイレクトします。
+
+ロードバランサを使用する場合、`keepRamlBaseUri` を true に設定し、baseUri プロパティにプロキシの URL を設定します。

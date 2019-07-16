@@ -1,0 +1,15 @@
+= APIkit について
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+APIkit は Mule REST または SOAP API を構築するためのツールです。次のいずれかのモデリング言語に基づいて API を開発します。
+
+* RESTful API Modeling Language (RAML) 1.0 および 0.8 バージョン
+* Web Service Description Language (WSDL)
+
+APIkit は REST API の設計と実装を簡略化します。APIkit は、それぞれ REST または Web サービス契約で要求されるコミュニケーション操作を満たす、RAML または WSDL に基づいて最小限の Mule フローを生成します。
+
+RAML コードの作成と同期には Design Center をお勧めしますが、Studio には、Studio 内で開発全体を実行する場合に構文検証と提案を提供する RAML エディタが含まれています。APIkit を使用してフローを生成する場合、Studio を使用してフロー生成プロセスを自動化するか、XML エディタで Mule の APIkit フローを作成できます。
+
+APIkit プロジェクトは、オンサイトまたは CloudHub で実行できます。API を生成したら、API Console を使用してコールをシミュレーションできます。

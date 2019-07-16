@@ -1,0 +1,53 @@
+= パラメータを使用した ID によるユーザの絞り込み方法
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+この手順では、API によってコンシュームされるデータを絞り込むクエリパラメータを設定する方法について説明します。クエリパラメータの表示は、パスセグメントを使用してユーザの一意の識別子を取得する従来のアプローチではなく、例を示すために選択されています。この手順では、ID = _n_ のユーザに関する情報を返すロジックを API に追加します。
+
+ID でユーザを絞り込むフローを修正します。
+
+. [HTTP Listener] コンポーネントを Mule パレットから get:/users/userbyid:api-config フローの [Source (ソース)] セクションにドラッグします。
+. Listener のプロパティエディタで、[HTTP Listener] の [Connector Configuration (コネクタ設定)] の [api-httpListenerConfig] を選択します。
++
+image:edit-16x16.gif[Edit-16x16] をクリックし、[OK] をクリックしてデフォルトのホスト 0.0.0.0 とポート 8081 を受け入れます。
+. Listener のプロパティエディタで、[General (一般)] の [Path (パス)] を​*「/placeholder/byid」*​に設定します。
+. [Process (プロセス)] 領域から [Transform Message] を削除します。
+. [HTTP Request] コンポーネントを [Process (プロセス)] 領域の [Transform Message] の左側にドラッグします。
+. [Configuration (設定)] で、HTTP_Request_configuration を選択します。image:edit-16x16.gif[Edit-16x16] をクリックし、デフォルトの設定を受け入れます。
++
+* Host (ホスト) = jsonplaceholder.typicode.com
+* Port (ポート) = 80.
++
+[OK] をクリックします。
++
+. プロパティエディタで、[General (一般)] の [HTTP Request (HTTP 要求)] の次のオプションを設定します。
+* Path (パス): *「/users」*​に設定します。
+* Method (メソッド): デフォルトメソッド「GET」を受け入れます。
+* [Query Parameters (クエリパラメータ)] タブを選択し、image:add-16x16.png[Add-16x16] をクリックして `"key"` と `"value"` を次の名前と値 (引用符なし) で置き換えます。
++
+** Name (名前): *id*
+** Value (値): *attributes.queryParams.id*
+** その他はデフォルトを受け入れます。
++
+image::apikit-query-parameter.png[]
+. プロパティエディタで、メタデータのプロパティを次のように設定します。
++
+* [Metadata (メタデータ)] を選択します。
++
+image::apikit-metadata.png[]
++
+* id のデータ型を次のように宣言します。
++
+** ドロップダウンから [Input: Payload (入力: ペイロード)] を選択します。
+** 「int-type」など、任意の名前を使用して型に名前を付けます。
+** 型を整数として定義します。
++
+image::apikit-set-payload-type.png[]
+. すべて保存します。
+
+次に、ユーザ名のみを取得するサービスを追加します。
+
+== 関連情報
+
+* xref:add-names-service-task.adoc[ユーザ名のみを取得するサービスの追加方法]

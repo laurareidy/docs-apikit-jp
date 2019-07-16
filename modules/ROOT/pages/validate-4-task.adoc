@@ -1,0 +1,19 @@
+= クエリパラメータとヘッダーの検証方法
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+この手順は、Studio で APIkit を使用して Mule フローを生成済みであることを前提としています。APIkit Router は、ヘッダーとクエリパラメータを検証するかどうかを設定できます。厳格なクエリパラメータとヘッダ検証は、パラメータを RAML で定義されたもののみに制限します。検証を有効にすると、パフォーマンスに影響する可能性があります。多くの複雑な検証では応答時間が遅くなる可能性があるため、ユースケースが遅延を許容できない場合は、検証を無効にすることをお勧めします。デフォルトでは、検証は無効です。
+
+. Studio で、[APIkit Router] を選択します。
++
+image::router-selected.png[]
++
+. [Router Configuration (ルータ設定)] で、image:edit-16x16.gif[Edit-16x16] または image:add-16x16.png[Add-16x16] をクリックします。
+. [Disable Validations (検証を無効化)] で、[True] を選択して検証を無効にします。検証ドロップダウンの表現を使用して、検証を無効または有効にできます。
++
+image::validation-configuration.png[]
++
+. [Query Parameters Strict Validations (クエリパラメータの厳格な検証)] で、[True] を選択してパラメータを RAML で定義されたもののみに制限します。
+. [Headers Strict Validations (ヘッダーの厳格な検証)] で、[True] を選択してヘッダーを RAML で定義されたもののみに制限します。
+. この手順を元に戻すには、[False] を選択してそれぞれの検証設定を抑制するか、[Disable Validations (検証を無効化)] を [False] に設定して両方の検証設定を抑制します。

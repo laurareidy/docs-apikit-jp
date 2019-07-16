@@ -1,0 +1,30 @@
+= ユーザ名のみを取得するサービスの追加方法
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+この手順では、ユーザを絞り込んでユーザ名のリストを取得するフローを追加します。必要な結果を返すように Transform Message をセットアップします。
+
+. get:/users:api-config フローをコピーして貼り付け、別のフローを作成します。フローを選択し、[Edit (編集)] > [Copy (コピー)] を選択します。キャンバス上の空白領域をクリックして、[Edit (編集)] > [Paste (貼り付け)] を選択します。
++
+フローのコピーがキャンバスの下部に表示されます。
++
+. フローのコピーで HTTP リスナコンポーネントを選択し、プロパティエディタで [Path (パス)] を「/placeholder」から​*「/placeholder/names」*​に変更します。
+. [Transform Message] コンポーネントを Mule パレットから HTTP リクエスタの右側にドラッグします。
++
+image::transform-msg.png[メタデータの定義]
++
+. プロパティエディタで、出力コードを変更して application/java の代わりに application/json MIME タイプを指定し、`payload.name` を追加します。
++
+----
+%dw 1.0
+%output application/json
+---
+payload.name
+----
+
+次に、API 実装をテストします。
+
+== 関連情報
+
+* xref:test-api-task.adoc[API 実装のテスト方法]

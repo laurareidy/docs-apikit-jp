@@ -1,0 +1,29 @@
+= ワークフロー: API の作成、テスト、実装
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+:keywords: api, raml, json
+
+このワークフローは、例を示すために `+http://jsonplaceholder.typicode.com+` の無料のオンライン REST サービス JSONPlaceholder を使用します。  JSONPlaceholder サービスは、JSON 形式のユーザ情報を提供します。自分で RAML API 仕様を設計し、RAML に基づいて Studio で APIkit プロジェクトを作成します。API コールをシミュレーションし、プロジェクトを Mule アプリケーションとして実装するロジックを追加します。リソースは /users と /userbyid です。/users リソースは、すべてのユーザ情報を取得します。/userbyid リソースは、特定のユーザの情報を取得します。
+
+. Design Center で RAML API 仕様を設計します。
++
+または、Design Center の代わりにテキストエディタを使用して、RAML 仕様および連動する JSON サンプルファイルを作成できます。
++
+* xref:apikit-4-raml-text-task.adoc[RAML 仕様ファイルを作成します]。
+* xref:apikit-4-json-text-task.adoc[JSON サンプルを作成]して RAML 仕様を含めます。
++
+. API 仕様をインポートして xref:start-project-task.adoc[APIkit プロジェクトを開始]します。
+. xref:run-apikit-task.adoc[APIkit プロジェクトを実行します]。
+. xref:apikit-simulate.adoc[API への API コールをシミュレーションしてテストします。]
+. API にビジネスロジックを追加します。
++
+* JsonPlaceholder サービスへのxref:implement-endpoint-task.adoc[エンドポイントを実装]します。
+* xref:filter-users-id-task.adoc[ID でユーザを絞り込むロジックを追加します]。
+* xref:add-names-service-task.adoc[ユーザの名前のみを取得するサービスを追加します]。
+. xref:test-api-task.adoc[API 実装をテストします]。
+
+== 関連情報
+
+* xref:retrieve-raml-task.adoc[RAML ファイルの取得方法]
+* http://jsonplaceholder.typicode.com[JSONPlaceholder]
