@@ -19,7 +19,7 @@ image::apikit-4-project.png[]
 新しいプロジェクトが表示されます。プロジェクトには WSDL ファイルを含む `src/main/resources/api` フォルダがあります。
 +
 . キャンバス上の空白領域を右クリックして、プロジェクトを実行するオプションを選択します。
-. `+http://localhost:8081/TshirtService/TshirtServicePort?wsdl+` に移動します。
+.`+http://localhost:8081/TshirtService/TshirtServicePort?wsdl+` に移動します。
 +
 TShirtService WSDL ファイルの内容が表示されます。
 

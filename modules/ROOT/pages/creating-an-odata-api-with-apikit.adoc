@@ -5,7 +5,7 @@ endif::[]
 :keywords: apikit, Apikit 拡張, odata
 
 APIkit OData 拡張では、HTTP ベースのデータサービスの作成で OData (Open Data Protocol) バージョン 2 がサポートされています。これらのサービスを通じて、HTTP を使用してデータソースをクエリできます。 +
-APIkit OData 拡張は、OData サービスがリソースの記述を形式化するために使用するエンティティデータモデル (EDM) からサービスを作成します。EDM 互換のデータ型を使用して RAML で EDM を記述し、API エンティティを表します。 +
+APIkit OData 拡張は、OData サービスがリソースの記述を形式化するために使用するエンティティデータモデル (EDM) からサービスをビルドします。EDM 互換のデータ型を使用して RAML で EDM を記述し、API エンティティを表します。 +
 APIkit OData 拡張は、OData 要求を処理する Mule フローを生成します。データソースを設定してフローにエンドポイントを追加した後にアプリケーションをデプロイすると、異なる URL からアクセスできる RESTful API と OData API が公開されます。このページのサンプル OData MySQL は、HTTP ベースのデータサービスを使用して MySQL データベースを照会する方法を示しています。
 
 APIkit OData 拡張を使用して、従来の API を OData API として公開したり、Salesforce で公開する前にデータを調整したり、Oracle、DB2、または Azure DB 用の双方向の OData API を作成したりできます。
@@ -24,19 +24,19 @@ APIkit で OData 対応 API を作成および使用するには、次のソフ�
 次の手順の説明に従って、Anypoint Studio から APIKit OData 拡張をインストールします。
 
 . Studio の *[Help (ヘルプ)]* メニューから、*[Install New Software (新しいソフトウェアをインストール)]* を選択します。
-. *[Add... (追加...)]* をクリックします。
-. *[Name (名前)]* 項目で `APIkit for ODATA Update Site` と入力します。
-. *[Location (場所)]* 項目で `+http://studio.mulesoft.org/s3/apikit-for-odata+` と入力します。
-. *[OK]* をクリックします。
+. ​*[Add... (追加...)]* をクリックします。
+. ​*[Name (名前)]* 項目で `APIkit for ODATA Update Site` と入力します。
+. ​*[Location (場所)]* 項目で `+http://studio.mulesoft.org/s3/apikit-for-odata/+` と入力します。
+. ​*[OK]* をクリックします。
 +
 Studio に選択する項目のリストが表示されます。
 +
 . Anypoint OData プラグインを更新するチェックボックスをオンにします。
-. *[Next (次へ)]* をクリックします。
+. ​*[Next (次へ)]* をクリックします。
 +
 [Install Remediation Page (インストール修復ページ)] が表示される場合があります。
 +
-. *[Next (次へ)]* をクリックし、もう一度 *[Next (次へ)]* をクリックして、修復ソフトウェアをインストールします。
+. ​*[Next (次へ)]* をクリックし、もう一度 *[Next (次へ)]* をクリックして、修復ソフトウェアをインストールします。
 . 商品の契約条件に同意し、*[Finish (完了)]* をクリックします。
 +
 Studio の右下隅に「Installing Update (%) (更新のインストール中 (%))」メッセージが表示されます。
@@ -47,16 +47,16 @@ Studio の右下隅に「Installing Update (%) (更新のインストール中 (
 
 前提条件ソフトウェアをインストールしたら、APIkit OData 拡張を使用するための次の概要手順を実行します。
 
-. `odata.raml` という名前のエンティティデータモデルを定義し、RAML ライブラリとしてファイルを設定します。
+. ​`odata.raml` という名前のエンティティデータモデルを定義し、RAML ライブラリとしてファイルを設定します。
 +
 [TIP]
-link:{attachmentsdir}/odata.raml[サンプルエンティティデータモデル] をダウンロードして、ファイルの作成方法を確認できます。
+link:​{attachmentsdir}​/odata.raml[サンプルエンティティデータモデル] をダウンロードして、ファイルの作成方法を確認できます。
 
 +
-. Anypoint Studio で新しい Mule プロジェクトを作成します。*[File (ファイル)]* をクリックし、*[New (新規)] > [Mule Project (Mule プロジェクト)]* を選択します。
+. Anypoint Studio で新しい Mule プロジェクトを作成します。​*[File (ファイル)]* をクリックし、​*[New (新規)] > [Mule Project (Mule プロジェクト)]* を選択します。
 +
-[New Mule Project (新規 Mule プロジェクト)] ダイアログで、*[Specify API definition file location or URL (API 定義ファイルの場所または URL を指定)]* を選択します。
-. *[Finish (完了)]* をクリックします。
+[New Mule Project (新規 Mule プロジェクト)] ダイアログで、​*[Specify API definition file location or URL (API 定義ファイルの場所または URL を指定)]* を選択します。
+. ​*[Finish (完了)]* をクリックします
 . Studio プロジェクトエクスプローラで `odata.raml` を /src/main/resources/api にコピーします。
 . プロジェクトエクスプローラで、`odata.raml` を右クリックし、*[Mule]* > *[Generate OData API from RAML Types (RAML 型からの OData API の生成)]* を選択します。
 +
@@ -77,7 +77,7 @@ image::creating-an-odata-api.png[]
 プロジェクトを右クリックし、*[Run As (別のユーザとして実行)]* > *[Mule Application (Mule アプリケーション)]* を選択します。
 * CloudHub へ
 +
-プロジェクトを右クリックし、*[Anypoint Platform]* > *[Deploy to CloudHub (CloudHub にデプロイ)]* を選択します。
+プロジェクトを右クリックし、*[Anypoint Platform]* > *[Deploy to Cloud (クラウドにデプロイ)]* を選択します。
 
 デプロイしたら、Salesforce などの外部 OData コンシューマサービスに OData アプリケーションを登録することもできます。
 
@@ -97,18 +97,18 @@ image::creating-an-odata-api.png[]
 . link:{attachmentsdir}/apikit-odata-example-master.zip[圧縮 Maven プロジェクト]、`apikit-odata-example-master.zip` をダウンロードして展開します。
 +
 [TIP]
-`pom.xml` やその他のプロジェクトファイルは、apikit-odata-example-master ディレクトリにあります。
+​`pom.xml` やその他のプロジェクトファイルは、apikit-odata-example-master ディレクトリにあります。
 
 +
 . Studio で、*[File (ファイル)]* > *[Import (インポート)]* を選択します。
 +
-*[Select (選択)]* ダイアログが表示されます。
+​*[Select (選択)]* ダイアログが表示されます。
 +
-. *[Anypoint Studio]* > *[Anypoint Studio Project from file system (Anypoint Studio プロジェクトをファイルシステムから)]* を選択します。*[Next (次へ)]* をクリックします。
+. ​*[Anypoint Studio]* > *[Anypoint Studio Project from file system (Anypoint Studio プロジェクトをファイルシステムから)]* を選択します。​*[Next (次へ)]* をクリックします。
 +
 [Import Mule Project (Mule プロジェクトのインポート)] ダイアログが表示されます。
 +
-. apikit-odata-example-master ディレクトリから POM ファイルを参照して選択します。*[Finish (完了)]* をクリックします。
+. apikit-odata-example-master ディレクトリから POM ファイルを参照して選択します。​*[Finish (完了)]* をクリックします。
 +
 [TIP]
 プロジェクトエクスプローラにテストプロジェクトが表示されます。プロジェクトエクスプローラで src/main/app 内の `api.xml` をクリックすると、APIkit OData 拡張によってキャンバスに表示されるフローが生成されます。
@@ -205,7 +205,7 @@ HTTP サービスのメタデータを取得します。
 http://localhost:8081/api/odata.svc/$metadata
 ----
 
-応答は、HTTP サービス API のサンプルを作成するために使用した `odata.raml` EDM と同じです。
+応答は、HTTP サービス API のサンプルをビルドするために使用した `odata.raml` EDM と同じです。
 [source,xml,linenums]
 ----
 <edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" Version="1.0">

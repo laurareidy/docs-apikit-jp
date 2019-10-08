@@ -8,12 +8,12 @@ APIKit は、Mule 4 の主要なエラー処理メカニズムに基づいてエ
 
 [%header,cols="10a,60a,30a"]
 |===
-| Status Code (状況コード) | 型| Message (メッセージ)
-| 400 | APIKIT:BAD_REQUEST | Bad request (不正な要求)
-| 404 | APIKIT:NOT_FOUND | Resource not found (リソースが見つかりません)
-| 405 | APIKIT:METHOD_NOT_ALLOWED | Method not allowed (メソッドが許可されていません)
-| 406 | APIKIT:NOT_ACCEPTABLE | Not acceptable (使用できません)
-| 415 | APIKIT:UNSUPPORTED_MEDIA_TYPE | Unsupported media type (サポートされていないメディアタイプ)
+| Status Code | Type| Message
+| 400 | APIKIT:BAD_REQUEST | Bad request
+| 404 | APIKIT:NOT_FOUND | Resource not found
+| 405 | APIKIT:METHOD_NOT_ALLOWED | Method not allowed
+| 406 | APIKIT:NOT_ACCEPTABLE | Not acceptable
+| 415 | APIKIT:UNSUPPORTED_MEDIA_TYPE | Unsupported media type
 |===
 
 次の HTTP 400 応答の例は、エラーハンドラの構成を示しています。独自のカスタム状況コードを追加するには、ここに示されたパターンに従います。

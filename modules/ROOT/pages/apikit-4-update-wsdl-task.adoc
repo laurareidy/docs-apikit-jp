@@ -7,7 +7,7 @@ endif::[]
 
 WSDL ファイルを更新する手順は、次のとおりです。
 
-. `+https://docs.mulesoft.com/apikit/v/4.x/_attachments/tshirt-modified.wsdl+` をダウンロードします。
+.  `+https://docs.mulesoft.com/apikit/v/4.x/_attachments/tshirt-modified.wsdl+` をダウンロードします。
 . ダウンロードしたファイルの内容全体をコピーします。
 . Studio で、[src/main/resources/api/tshirt2.wsdl] を右クリックして [Open With (プログラムから開く)] > [Test Editor (テストエディタ)] を選択します。
 . tshirt2.wsdl のコンテンツをクリップボードのコンテンツで置き換えます。

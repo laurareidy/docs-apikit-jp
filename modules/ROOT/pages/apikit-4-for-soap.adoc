@@ -7,9 +7,9 @@ endif::[]
 このワークフローでは、Studio と APIkit for SOAP を使用して API を作成します。APIkit for SOAP は、リモート WSDL のコンシュームをサポートしています。ただし、このワークフローではダウンロードしたローカル WSDL を使用します。作成した SOAP インターフェースはデータリソースにアクセスし、そのインターフェースを API として機能するバックエンドプロセスと統合します。
 
 . xref:apikit-4-soap-prerequisites-task.adoc[APIkit for SOAP を使用する場合の前提条件を満たす]
-. xref:apikit-4-soap-project-task.adoc[APIkit for SOAP プロジェクトの作成方法]
-. xref:apikit-4-soap-fault-task.adoc[SOAP エラーの生成方法]
-. xref:apikit-4-prevent-fault-task.adoc[SOAP エラーの防止方法]
+. xref:apikit-4-soap-project-task.adoc[APIkit for SOAP プロジェクトを作成する]
+. xref:apikit-4-soap-fault-task.adoc[SOAP エラーを生成する]
+. xref:apikit-4-prevent-fault-task.adoc[SOAP エラーを防止する]
 . xref:apikit-4-get-header-task.adoc[SOAP ヘッダーの取得方法]
 . xref:apikit-4-set-header-task.adoc[SOAP ヘッダーの設定方法]
 . xref:apikit-4-display-fault-task.adoc[型付けされたエラーの表示方法]

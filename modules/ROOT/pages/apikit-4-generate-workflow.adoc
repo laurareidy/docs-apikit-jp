@@ -13,15 +13,15 @@ endif::[]
 * xref:apikit-4-raml-text-task.adoc[RAML 仕様ファイルを作成します]。
 * xref:apikit-4-json-text-task.adoc[JSON サンプルを作成]して RAML 仕様を含めます。
 +
-. API 仕様をインポートして xref:start-project-task.adoc[APIkit プロジェクトを開始]します。
-. xref:run-apikit-task.adoc[APIkit プロジェクトを実行します]。
+API 仕様をインポートして xref:start-project-task.adoc[APIkit プロジェクトを開始]します。
+xref:run-apikit-task.adoc[APIkit プロジェクトを実行します]。
 . xref:apikit-simulate.adoc[API への API コールをシミュレーションしてテストします。]
 . API にビジネスロジックを追加します。
 +
 * JsonPlaceholder サービスへのxref:implement-endpoint-task.adoc[エンドポイントを実装]します。
 * xref:filter-users-id-task.adoc[ID でユーザを絞り込むロジックを追加します]。
 * xref:add-names-service-task.adoc[ユーザの名前のみを取得するサービスを追加します]。
-. xref:test-api-task.adoc[API 実装をテストします]。
+xref:test-api-task.adoc[API 実装をテストします]。
 
 == 関連情報
 
