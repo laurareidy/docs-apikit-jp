@@ -3,7 +3,7 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-新しい Studio プロジェクトを作成し、API 定義ファイルを _指定しない_ 場合、APIkit は次を含む骨格 RAML ファイルおよび XML 設定を生成します。
+新しい Studio プロジェクトを作成し、API 定義ファイルを_指定しない_場合、APIkit は次を含む骨格 RAML ファイルおよび XML 設定を生成します。
 
 * HTTP リスナの設定
 * APIkit Router コンポーネント
@@ -45,7 +45,7 @@ image::new-raml.png[]
 
 == メインフローの作成
 
-APIkit プロジェクト内で、フローを作成します。
+APIkit プロジェクト内で、フローをビルドします。
 
 . 次のコンポーネントを Mule パレットからドラッグします。
 +

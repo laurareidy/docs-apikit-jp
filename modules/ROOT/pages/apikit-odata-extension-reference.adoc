@@ -1,11 +1,11 @@
 = APIkit OData 拡張リファレンス
 :keywords: apikit, Apikit 拡張, odata, APIkit Odata リファレンス
 
-RAML を使用して作成したエンティティデータモデル (EDM) は、OData API を作成するための基盤となります。EDM 互換のデータ型を使用して、このリファレンスで説明されているように `odata.raml` ファイルを作成します。APIkit OData 拡張を使用してフローを生成したら、API エンドポイントを実装する必要があります。
+RAML を使用して作成したエンティティデータモデル (EDM) は、OData API をビルドするための基盤となります。EDM 互換のデータ型を使用して、このリファレンスで説明されているように `odata.raml` ファイルを作成します。APIkit OData 拡張を使用してフローを生成したら、API エンドポイントを実装する必要があります。
 
 == エンティティデータモデル
 
-APIkit OData 拡張は、サポートされる EDM 型を使用して OData エンティティデータモデル (EDM) を記述する `odata.raml` に基づいて OData API を作成します。`odata.raml` ファイルは RAML ライブラリです。各 DataType は EntityModel を表します。次に例を示します。
+APIkit OData 拡張は、サポートされる EDM 型を使用して OData エンティティデータモデル (EDM) を記述する `odata.raml` に基づいて OData API をビルドします。`odata.raml` ファイルは RAML ライブラリです。各 DataType は EntityModel を表します。次に例を示します。
 
 [source,yaml,linenums]
 ----

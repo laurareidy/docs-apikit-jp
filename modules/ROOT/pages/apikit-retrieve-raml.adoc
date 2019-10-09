@@ -5,7 +5,7 @@ endif::[]
 
 curl または HTTP クライアント (Postman など) を使用して GET 要求を実行することとで、ルート RAML ファイルとそのインクルードファイルを取得できます。RAML 0.8 を使用している場合、1 回のコールでルート RAML ファイルとすべてのインクルードファイルを解決できます。次のように、GET 要求でヘッダーと URL を送信します。
 
-* ヘッダー: *Accept: application/raml+yaml*
+* ヘッダー *Accept: application/raml+yaml*
 * URL: `{scheme}://{host}:{port}/{console path}`
 
 *RAML 0.8 の例*

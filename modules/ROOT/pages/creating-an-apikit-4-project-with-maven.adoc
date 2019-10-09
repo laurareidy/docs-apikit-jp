@@ -59,7 +59,7 @@ Maven コマンドを使用して、既存の Maven プロジェクト (RAML と
 
 == Maven アーキタイプコマンド
 
-`mvn archetype` コマンドを使用して、プロジェクトの xref:3.x@apikit-basic-anatomy.adoc[APIkit 要素]を作成します。Maven は、 _アーキタイプ_ と呼ばれるテンプレートにプロジェクトを作成する手順および関連付けられた設定を保存します。APIkit は、APIkit プロジェクトの作成ニーズに合わせて調整された特殊な Maven アーキタイプを提供します。Mule の公開リポジトリでホストされるため、ダウンロードする必要はありません。Maven コメントでその仮想アドレスを参照するだけです。
+`mvn archetype` コマンドを使用して、プロジェクトの xref:3.x@apikit-basic-anatomy.adoc[APIkit 要素]を作成します。Maven は、 _アーキタイプ_ と呼ばれるテンプレートにプロジェクトをビルドする手順および関連付けられた設定を保存します。APIkit は、APIkit プロジェクトの作成ニーズに合わせて調整された特殊な Maven アーキタイプを提供します。Mule の公開リポジトリでホストされるため、ダウンロードする必要はありません。Maven コメントでその仮想アドレスを参照するだけです。
 
 `mvn archetype` コマンドは、新しいプロジェクト、ディレクトリ構造、および空の `api.raml` ファイルを作成します。このコマンドは必要な連動関係を設定します。
 
@@ -69,7 +69,7 @@ Maven コマンドを使用して、既存の Maven プロジェクト (RAML と
 
 [%header,cols="2*"]
 |===
-|パラメータ |値
+|Parameter |Value
 |`archetypeGroupId` | `org.mule.tools`
 |`archetypeArtifactId` | `mule-apikit-archetype`
 |`archetypeVersion` | `1.2.5`
@@ -82,11 +82,11 @@ Maven コマンドを使用して、既存の Maven プロジェクト (RAML と
 
 [%header,cols="2*"]
 |===
-|パラメータ | 説明
-|`groupId` |プロジェクトの標準 Maven グループ ID。
-|`artifactId` |Maven によってプロジェクトに与えられるファイル名。
-|`package` |メッセージプロセッサが稼働する Java パッケージ。
-|`version` |新しいプロジェクトのバージョン。
+|Parameter | Description
+|`groupId` |The standard Maven group Id for the project.
+|`artifactId` |The file name Maven will give to your project.
+|`package` |The Java package under which the message processor will live.
+|`version` |The version of the new project.
 |===
 
 これらのパラメータを含めない場合、実行時に値の入力が求められます。

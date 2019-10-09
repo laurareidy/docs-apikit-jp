@@ -12,7 +12,7 @@ image::apikit-for-soap-3005f.png[height=440,width=700]
 +
 . ドロップダウンから [Variable (変数)] を選択します。
 +
-. [Variable Name (変数名)] で、クリップボードのコンテンツを貼り付け、プレフィクスとして *soap.* を追加するか、​*「soap.APIUsageInformation」*​と入力します。
+. [Variable Name (変数名)] で、クリップボードのコンテンツを貼り付け、プレフィクスとして *soap.* を追加するか、*「soap.APIUsageInformation」*と入力します。
 +
 完全な変数名は次のようになります。
 +
