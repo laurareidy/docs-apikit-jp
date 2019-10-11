@@ -69,7 +69,7 @@ Maven コマンドを使用して、既存の Maven プロジェクト (RAML と
 
 [%header,cols="2*"]
 |===
-|Parameter |Value
+|パラメータ |値
 |`archetypeGroupId` | `org.mule.tools`
 |`archetypeArtifactId` | `mule-apikit-archetype`
 |`archetypeVersion` | `1.2.5`
@@ -82,11 +82,11 @@ Maven コマンドを使用して、既存の Maven プロジェクト (RAML と
 
 [%header,cols="2*"]
 |===
-|Parameter | Description
-|`groupId` |The standard Maven group Id for the project.
-|`artifactId` |The file name Maven will give to your project.
-|`package` |The Java package under which the message processor will live.
-|`version` |The version of the new project.
+|パラメータ | 説明
+|`groupId` |プロジェクトの標準 Maven グループ ID。
+|`artifactId` |Maven によってプロジェクトに与えられるファイル名。
+|`package` |メッセージプロセッサが稼働する Java パッケージ。
+|`version` |新しいプロジェクトのバージョン。
 |===
 
 これらのパラメータを含めない場合、実行時に値の入力が求められます。
@@ -148,4 +148,4 @@ mvn org.mule.tools:mule-apikit-maven-plugin:create
 +
 image::import-maven.png[]
 +
-. ウィザードの残りの手順を完了し、ローカルドライブにあるプロジェクトの `pom.xml` の​*名前*​と​*場所*​を特定し、*[Finish (完了)]* をクリックしてプロジェクトをインポートします。
+. ウィザードの残りの手順を完了し、ローカルドライブにあるプロジェクトの `pom.xml` の*名前*と*場所*を特定し、*[Finish (完了)]* をクリックしてプロジェクトをインポートします。
